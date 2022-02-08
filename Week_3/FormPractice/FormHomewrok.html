@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms hometask</title>
+</head>
+<body>
+    <h1>Kontaktų forma</h1>
+    <form action="./pridavimas.html" method="get">
+        <fieldset>
+            <legend>Kontaktinė informacija</legend>
+            <div>
+                <label>
+                    Jūsų vardas:
+                    <input type="text" placeholder="Jūsų vardas" name="name"/>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Jūsų pavardė:
+                    <input type="text" placeholder="Jūsų pavardė" name="lastname"/>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Telefono numeris:
+                    <input type="text" placeholder="Jūsų telefono numeris" name="phonenumber"/>
+                </label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Užklausa</legend>
+            <label>
+                Jūsų žinutė:
+                <textarea placeholder="Jūsų žinutė..." name="message"></textarea>
+            </label>
+        </fieldset>
+        <input type="submit" value="Pateikti"/>
+    </form>
+    
+</body>
+</html>
