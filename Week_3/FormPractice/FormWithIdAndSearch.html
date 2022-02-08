@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <form action="https://www.google.com/search" method="get" id="submitId">
+        <div>
+            <label>
+                Paieškos tekstas
+                <input type="text" placeholder="Įveskite vardą" name="q"><!--input name is used for form, when sending request these fields will be identified-->
+            </label>
+        </div>
+        <div>
+            <button>Google Paieška</button>
+            <input type="submit" value="Bing paieška" formaction="https://www.bing.com/search"/>
+        </div>
+    </form>
+
+    <hr>
+
+    <input type="submit" value="Submit" form="submitId"/>
+    
+</body>
+</html>
