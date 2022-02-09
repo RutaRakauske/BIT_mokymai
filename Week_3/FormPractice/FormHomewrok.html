@@ -14,19 +14,19 @@
             <div>
                 <label>
                     Jūsų vardas:
-                    <input type="text" placeholder="Jūsų vardas" name="name"/>
+                    <input required type="text" placeholder="Jūsų vardas" name="name" minlength="2" maxlength="50"/>
                 </label>
             </div>
             <div>
                 <label>
                     Jūsų pavardė:
-                    <input type="text" placeholder="Jūsų pavardė" name="lastname"/>
+                    <input required type="text" placeholder="Jūsų pavardė" name="lastname" minlength="2" maxlength="50"/>
                 </label>
             </div>
             <div>
                 <label>
                     Telefono numeris:
-                    <input type="text" placeholder="Jūsų telefono numeris" name="phonenumber"/>
+                    <input required type="text" placeholder="Jūsų telefono numeris" name="phonenumber" minlength="2" maxlength="11" pattern="\+?\d+"/>
                 </label>
             </div>
         </fieldset>
@@ -34,7 +34,7 @@
             <legend>Užklausa</legend>
             <label>
                 Jūsų žinutė:
-                <textarea placeholder="Jūsų žinutė..." name="message"></textarea>
+                <textarea required placeholder="Jūsų žinutė..." name="message" minlength="20" maxlength="500" ></textarea>
             </label>
         </fieldset>
         <input type="submit" value="Pateikti"/>
