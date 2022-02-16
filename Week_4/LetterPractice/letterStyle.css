@@ -1,0 +1,26 @@
+.body {
+    max-width: 800px;
+    border: 1px solid black;
+    background-color: lavender;
+    padding: 20px;
+    text-align: justify;
+    font-family: "Courier New", Courier, monospace;
+}
+.addressInfo {
+    padding-bottom: 30px;
+}
+time {
+    font-weight: bold;
+}
+.referenceTo {
+    font-size: 20px;
+    padding-bottom: 25px;
+}
+.referenceFrom {
+    padding-top: 25px;
+    text-align: right;
+}
+.referenceFromName {
+    font-size: 20px;
+    font-style: italic;
+}
