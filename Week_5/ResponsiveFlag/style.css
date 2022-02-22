@@ -1,0 +1,22 @@
+body {
+    background-color: yellow;
+}
+@media (max-width: 1200px) {
+    p {
+        font-size: 2rem;
+        color: yellow;
+    }
+    body {
+        background-color: green;
+    }
+}
+@media (max-width: 600px) {
+    p {
+        font-size: 3rem;
+        color: white;
+    }
+    body {
+        background-color: red;
+    }
+
+}
