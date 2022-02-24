@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Form</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <h1>Apmokėjimo forma</h1>
@@ -27,26 +28,26 @@
                 </div>
         </fieldset>
         <div>
-            <label>Vardas:*</label>
-            <input required type="text" minlength="2" maxlength="50" name="name"/>
+            <label class="firstLetter">Vardas:*</label>
+            <input required type="text" minlength="2" placeholder="Vardas" maxlength="50" name="name"/>
         </div>
         <div>
-            <label>Pavarde:*</label>
-            <input required type="text" minlength="2" maxlength="50" name="lastname"/>
+            <label class="firstLetter">Pavarde:*</label>
+            <input required type="text" minlength="2" placeholder="Pavardė" maxlength="50" name="lastname"/>
         </div>
         <div>
-            <label>El. paštas:*</label>
-            <input required type="email" name="email"/>
+            <label class="firstLetter">El. paštas:*</label>
+            <input required type="email" name="email" placeholder="Email adresas"/>
         </div>
         <div>
-            <label>Slaptažodis:*</label>
-            <input required type="password" minlength="5" name="password"/>
+            <label class="firstLetter">Slaptažodis:*</label>
+            <input required type="password" minlength="5" name="password" placeholder="Slaptažodis"/>
         </div>
 
         <h1>Apmokėjimo informacija</h1>
 
         <div>
-            <label>Kortelės tipas:*</label>
+            <label class="firstLetter">Kortelės tipas:*</label>
             <select required name="cardtype">
                 <option value="visa">Visa</option>
                 <option value="mc">Mastercard</option>
@@ -54,12 +55,12 @@
             </select>
         </div>
         <div>
-            <label>Kortelės numeris:*</label>
+            <label class="firstLetter">Kortelės numeris:*</label>
             <input required type="text" name="cardnumber" placeholder="4510123456781234" 
             pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}(?:2131|1800|35\d{3})\d{11})$"/>
         </div>
         <div>
-            <label>Galiojimo data:*<i>pateikite mm/dd/yyyy</i></label>
+            <label class="firstLetter">Galiojimo data:*<i>pateikite mm/dd/yyyy</i></label>
             <input required type="date" name="expiration" min="2022-02-12"/>
         </div>
         <button>Pateikti</button>
