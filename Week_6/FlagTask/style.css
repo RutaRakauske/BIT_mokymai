@@ -1,0 +1,10 @@
+html {
+    height: 100%;
+}
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(#fdba0b 33.3% 33%, #006a42 33.3% 66%, #c22229 33.3% 100%);
+}
