@@ -1,0 +1,49 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    height: 100vh;
+}
+.grid {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "header"
+    "section1"
+    "section2"
+    "section3"
+    "section4"
+    "section5";
+}
+header {
+    grid-area: header;
+    background-color: yellow;
+    height: 80px;
+}
+.section1 {
+    grid-area: section1;
+    background-color: orangered;
+    height: calc(100vh - 80px);
+}
+.section2 {
+    grid-area: section2;
+    background-color:cornflowerblue;
+    height: 100vh;
+}
+.section3 {
+    grid-area: section3;
+    background-color: orangered;
+    height: 100vh;
+}
+.section4 {
+    grid-area: section4;
+    background-color:cornflowerblue;
+    height: 100vh;
+}
+.section5 {
+    grid-area: section5;
+    background-color: orangered;
+    height: 100vh;
+}
