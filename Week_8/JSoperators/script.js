@@ -43,12 +43,27 @@ console.log (a>=c || b>c);
 console.log (!(b>c));
 console.log (typeof(2+4));
 console.log (typeof("tekstas"));
+console.log (typeof(4>2));
+console.log (typeof(4>"2"));
+console.log (typeof(4 + "2"));
 
 
 const x = 10, y = 5;
-
 const z = x > y? x : y; // if true, then x, if false then y. Value of z would be 10
 const w = x > y? y : x; // if true, then x, if false then y. Value of w would be 5
 
 console.log (z);
 console.log (w);
+
+const arlyginis = 10 % 2 === 0;
+console.log (arlyginis);
+
+// Prefix increment
+let prefix = 1;
+console.log(++prefix); // 2
+console.log(prefix); // 2
+
+// Postfix increment
+let postfix = 1;
+console.log(postfix++); // 1
+console.log(postfix); // 2
