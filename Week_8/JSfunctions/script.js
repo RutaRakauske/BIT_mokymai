@@ -142,3 +142,43 @@ function price(prob, prize, pay){
 } 
 
 console.log(price(2,10,19));
+
+//  12 uzduotis
+// Apibrėžkite funkcija kuri  priimtu parametrą minutes ir grąžintų vertę sekundėmis. Sukurkite kelis kintamuosius  šaukiant šią funkciją. Vėliau atspausdinkite kintamųjų reikšmes konsolėje.  
+
+function convertMinutes(minutes){
+  let seconds = minutes * 60;
+  return seconds;
+}
+
+const halfMin = convertMinutes(0.5);
+console.log(halfMin);
+const five = convertMinutes(5);
+console.log(five);
+const sixtyFive = convertMinutes(65);
+console.log(sixtyFive);
+
+//  13 uzduotis
+// Apibrėžkite funkcija kuri priimtų numerį metus ir atspausdintų konsolėje ar tai lyginiai metai ar ne. 
+
+function evenYear(year){
+  if (year % 2 === 0){
+    console.log("Lyginis");
+  }
+  else {
+    console.log("Nelyginis")
+  }
+}
+evenYear(2002);
+
+//  14 uzduotis
+//     Apibrėžkite funkcija kuri priimtų du parametrus, nuvažiuoti kilometrai ir benzino litro kaina, ir apskaičiuotų kiek jums kainavo kelionė.  Automobilio kuro vartojimą priskirkite kintamajam, o jo vertę pasirinkite pagal jūsų turimo automobilio kuro vartojimą. 
+
+
+function fuelPrice(km, price){
+  const consumption = 5;
+  let total = km/(100/consumption) * price;
+  return total;
+}
+
+console.log(fuelPrice (200, 1.80));
