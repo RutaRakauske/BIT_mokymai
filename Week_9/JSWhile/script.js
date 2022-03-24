@@ -61,58 +61,153 @@ readingSpeed(17);
 
 console.log("***************** 4 uzduotis ***************")
 
-let operator = "";
-let number = "";
-let no = "";
-let sum = 0;
-
-do{
-  number = prompt("Įveskite skaičių", no);
-  sum = sum + Number(number);
-  console.log(sum);
-}
-while (no === 0);
-
-
-// function calculator(operatorNo){
-//   if (operatorNo == undefined){
-//     console.log(`Įveskite vieną iš skaičių:
+function calculate(){
+  let number = "";
+  let temp = 0;
+  let operator = parseInt(prompt(`Įveskite vieną iš skaičių:
 // 1 - suma;
 // 2 - atimtis;
 // 3 - daugyba;
 // 4 - didžiausia reikšmė;
-// 5 - mažiausia reikšmė.`);
-//   }
-//   else if (operatorNo === 0){
-//     console.log("Stop");
-//   }
-//   else{
-//     if (operatorNo === 1){
-//       let sum = 0;
-//       do{
-//         function calc(number){
-//         sum = sum + number;
-//           return sum;
-//         }
-//       }
-//       while(operatorNo === 0);
+// 5 - mažiausia reikšmė
+// 0 - sustabdyti.`));
+  if (operator === 0){
+    console.log("stop");
+  }
+  else if (operator === 1){
+    do{
+      number = parseInt(prompt("Įveskite skaičių"));
+        if (number !== 0){
+        temp = temp + number;
+        console.log(number);
+        }
+        else{
+        }
+      }
+    while (number !== 0);
+    console.log("sum: " + temp);
+  }
+  else if (operator === 2){
+    do{
+      number = parseInt(prompt("Įveskite skaičių"));
+        if (number !== 0){
+        temp = temp - number;
+        console.log(number); 
+        }
+        else{ 
+        }
+      }
+    while (number !== 0);
+    console.log("substraction: " + temp);
+  }
+  else if (operator === 3){
+    temp = 1;
+    do{
+      number = parseInt(prompt("Įveskite skaičių"));
+        if (number !== 0){
+        temp = temp * number;
+        console.log(number);
+        }
+        else{
+        }
+      }
+    while (number !== 0);
+    console.log("multiplication: " + temp);
+  }
+  else if (operator === 4){
+    let arrayTemp = [];
+    do{
+      number = parseInt(prompt("Įveskite skaičių"));
+        if (number !== 0){
+        arrayTemp.push(number);
+        console.log(number); 
+        }
+        else{
+        }
+      }
+    while (number !== 0);
+    temp = Math.max(...arrayTemp);
+    console.log("max: " + temp);
+  }
+  else if (operator === 5){
+    let arrayTemp = [];
+    do{
+      number = parseInt(prompt("Įveskite skaičių"));
+        if (number !== 0){
+        arrayTemp.push(number);
+        console.log(number);
+        }
+        else{
+        }
+      }
+    while (number !== 0);
+    temp = Math.min(...arrayTemp);
+    console.log("min: " + temp);
+  }
+  else {
+    console.log("Incorrect data provided")
+  }
+}
 
-      
-//     }
-//     else if (operatorNo === 2){
-      
-//     }
-//     else if (operatorNo === 3){
-      
-//     }
-//     else if (operatorNo === 4){
-      
-//     }
-//     else {
-      
-//     }
-//   }
-// }
+calculate();
 
-// calculator(1);
+//  5 uzduotis
+// Matematikos mokytoja paprašė sukurti matematikos užduotį pirmos klasės mokiniams. Pirmokai mokosi sudėti du skaičius. Programa turėtų sugeneruoti du skaičius iš intervalo [0; 10] ir paprašyti įvesti atsakymą. Pirmokui suklydus, programa turėtų pasiūlyti atsakymą įvesti dar kartą. 
+console.log("***************** 5 uzduotis ***************")
 
+// https://www.educative.io/edpresso/how-to-generate-a-random-number-between-a-range-in-javascript
+function generateRandom(min = 0, max = 10) {
+    // find diff
+    let difference = max - min;
+    // generate random number 
+    let rand = Math.random();
+    // multiply with difference 
+    rand = Math.floor(rand * difference);
+    // add with min value 
+    rand = rand + min;
+    return rand;
+}
+
+function learningMath(){
+  let number1 = generateRandom();
+  let number2 = generateRandom();
+  let result = parseInt(prompt(number1 + `+` + number2 + `=`));
+  while (result !== number1 + number2){
+    result = parseInt(prompt(`Bandyk dar karta!
+    ` + number1 + `+` + number2 + `=`));
+  }
+  console.log("Valio");
+}
+
+learningMath();
+
+//  6 uzduotis
+// Parašykite programą, kuri atspausdintų įvesto skaičiaus s skaitmenis (nuo galo).
+// Kontroliniai duomenys:
+// Įvesta: s = 123
+// Gauta: 
+// 3
+// 2
+// 1
+console.log("***************** 6 uzduotis ***************")
+
+function backwards(){
+  let number = parseInt(prompt("Įveskite skaičių"));
+  let stringNo = String(number);
+  let lengthNo = stringNo.length - 1; // -1 nes .chartAt(0) pirmas teksto simbolis yra 0. While loope reikia tikrinti iki -1, nes lygiai taip pat pirmas simbolis naudojant .chartAt(0) yra nulis
+  console.log(stringNo);
+  while (lengthNo !== -1){
+    let temp = stringNo.charAt(lengthNo);
+    lengthNo--;
+    console.log(temp);
+  }
+}
+
+backwards();
+
+//  7 uzduotis
+// Parašykite programą, kuri apskaičiuotų duotojo skaičiaus a skaitmenų sumą s. 
+// Kontroliniai duomenys:
+// Įvesta: a = 65421
+// Gauta: s = 18.
+console.log("***************** 7 uzduotis ***************")
