@@ -211,3 +211,94 @@ backwards();
 // Įvesta: a = 65421
 // Gauta: s = 18.
 console.log("***************** 7 uzduotis ***************")
+
+function numberSum(a){
+  let stringA = String(a);
+  let lengthA = stringA.length - 1;
+  let sum = 0;
+  while (lengthA !== -1){
+    let temp = parseInt(stringA.charAt(lengthA));
+    sum = sum + temp;
+    lengthA--;
+  }
+  console.log(sum);
+}
+
+numberSum(65421);
+
+//  8 uzduotis
+// Parašykite programą, kuri apskaičiuotų duotojo skaičiaus a (nėra nulinių skaitmenų) skaitmenų sandaugą. 
+
+// Kontroliniai duomenys:
+// Įvesta: a = 611221
+// Gauta: sandauga = 24.
+
+console.log("***************** 8 uzduotis ***************")
+
+function daugyba(a){
+  let stringA = String(a);
+  let lengthA = stringA.length - 1;
+  let multiplication = 1;
+  while (lengthA !== -1){
+    let temp = parseInt(stringA.charAt(lengthA));
+    multiplication = multiplication * temp;
+    lengthA--;
+  }
+  console.log(multiplication);
+}
+
+daugyba(611221);
+
+//  9 uzduotis
+// Parašykite programą, kuri suskaičiuotų, kiek skaitmenų turi duotas skaičius a. 
+
+// Kontroliniai duomenys:
+// Įvesta: a = 6112211
+// Gauta: suma = 7.
+
+console.log("***************** 9 uzduotis ***************")
+
+function symbolsCount(a){
+  let stringA = String(a);
+  let lengthA = stringA.length - 1;
+  let count = 0;
+  while (lengthA !== -1){
+    let symbol = stringA.charAt(lengthA);
+    let temp = symbol.length;
+    count = count + temp;
+    lengthA--;
+  }
+  console.log(count);
+}
+
+symbolsCount(6112211);
+
+//  10 uzduotis
+// Parašykite programą, kuri suskaičiuotų, kiek duotas skaičius a turi lyginių ir nelyginių skaitmenų. 
+
+// Kontroliniai duomenys:
+// Įvesta: a = 63258
+// Gauta: lyginių 3, nelyginių 2.
+
+console.log("***************** 10 uzduotis ***************")
+
+function evenOdd(a){
+  const stringA = String(a);
+  let lengthA = stringA.length - 1;
+  let even = 0;
+  let odd = 0;
+  while (lengthA !== -1){
+    let temp = parseInt(stringA.charAt(lengthA));
+    if (temp % 2 === 0){
+      even++;
+    }
+    else {
+      odd++;
+    }
+    lengthA--;
+  }
+  console.log("Lyginių " + even);
+  console.log("Nelyginių " + odd);
+}
+
+evenOdd(63258);
