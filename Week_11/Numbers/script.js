@@ -254,20 +254,35 @@ function calcMovieTime(){
 calcMovieTime();
 
 // 15 užduotis
-// Elektroninis laikrodis rodo laiką: valandas, minutes ir sekundes (h, m, s). Kiek laiko rodys laikrodis po  penkių sekundžių?    
+// Elektroninis laikrodis rodo laiką: valandas, minutes ir sekundes (h, m, s). Kiek laiko rodys laikrodis po  penkių sekundžių?
+
+// Jei bus 10:59:58, tuomet reikai keisti visus 3 skaitmenis - 11:00:03
 console.log(`
 **************** 15 užduotis ****************`)
 
 function calcTime(){
   let start = prompt("Įveskite valandas, minutes, sekundes: ");
   let timeArray = start.split(":");
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
   if ((parseInt(timeArray[2]) + 5) >= 60){
-    if ((parseInt(timeArray[1]) + 1) >= 60){
-      
+    minutes = parseInt(timeArray[1]) + 1;
+    seconds = (parseInt(timeArray[2]) + 5) % 60;
+    if (minutes >= 60){
+      hours = parseInt(timeArray[0]) + 1; 
+      minutes = "00";
+      seconds = (parseInt(timeArray[2]) + 5) % 60;
+      console.log(hours + ":" + minutes + ":" + seconds);
+    }
+    else {
+      console.log(timeArray[0] + ":" + minutes + ":" + seconds); 
     }
   }
-    
-  console.log(finalTime);
+  else {
+    seconds = parseInt(timeArray[2]) + 5;
+    console.log(timeArray[0] + ":" + timeArray[1] + ":" + seconds);
+  }
 }
 
-calcTime()
+calcTime();
