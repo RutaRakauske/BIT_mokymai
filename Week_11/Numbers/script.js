@@ -286,3 +286,200 @@ function calcTime(){
 }
 
 calcTime();
+
+
+
+
+
+
+// 8.2
+// 1 užduotis
+// Naudokite funkcija rand(). Sukurkite du kintamuosius ir naudodamiesi funkcija rand() jiems priskirkite atsitiktines reikšmes nuo 0 iki 4. Didesnę reikšmę padalinkite iš mažesnės. Atspausdinkite rezultatus naudodami console.log()
+console.log("**************** 1 užduotis ****************")
+
+const firstVar = Math.floor(Math.random() * 5);
+const secondVar = Math.floor(Math.random() * 5);
+// console.log(firstVar);
+// console.log(secondVar);
+
+console.log(Math.max(firstVar, secondVar) / Math.min(firstVar, secondVar));
+
+// 2 užduotis
+// Naudokite funkcija rand(). Sukurkite tris kintamuosius ir naudodamiesi funkcija rand() jiems priskirkite atsitiktines reikšmes nuo 0 iki 25. Raskite ir su console.log() atspausdinkite kintamąjį turintį vidurinę reikšmę.
+console.log(`
+**************** 2 užduotis ****************`)
+
+const firstNo = Math.floor(Math.random() * 26);
+const secondNo = Math.floor(Math.random() * 26);
+const thirdNo = Math.floor(Math.random() * 26);
+// console.log(firstNo);
+// console.log(secondNo);
+// console.log(thirdNo);
+
+let min = Math.min(firstNo, secondNo, thirdNo);
+let max = Math.max(firstNo, secondNo, thirdNo);
+if (firstNo !== min && firstNo !== max){
+  console.log("Middle: " + firstNo);
+}
+else if (secondNo !== min && secondNo !== max){
+  console.log("Middle: " + secondNo);
+}
+else if (thirdNo !== min && thirdNo !== max){
+  console.log("Middle: " + thirdNo);
+}
+else{
+  console.log("There are 2 same numbers, so no middle.")
+}
+
+// 3 užduotis
+// Įvedami skaičiai -a, b, c –kraštinių ilgiai, trys kintamieji (naudokite ​rand()​ funkcija nuo 1 iki 10). Parašykite skriptą, kuris nustatytų, ar galima sudaryti trikampį ir atsakymą atspausdintų naudojant console.log().
+console.log(`
+**************** 3 užduotis ****************`)
+
+const a = Math.floor(Math.random() * 11);
+const b = Math.floor(Math.random() * 11);
+const c = Math.floor(Math.random() * 11);
+// console.log(a);
+// console.log(b);
+// console.log(c);
+
+function triangle(a, b, c){
+    const maxNo = Math.max(a, b, c);
+  if (a === maxNo){
+    if (b + c > maxNo){
+      return "Galima sudaryti trikampį";
+    }
+    else return "Negalima sudaryti trikampio";
+  }
+  else if (b === maxNo){
+    if (a + c > maxNo){
+      return "Galima sudaryti trikampį";
+    }
+    else return "Negalima sudaryti trikampio";
+  }
+  else {
+    if (a + b > maxNo){
+        return "Galima sudaryti trikampį";
+    }
+    else return "Negalima sudaryti trikampio";
+  }
+}
+
+console.log(triangle(a, b, c));
+
+// 4 užduotis
+// Sukurkite keturis kintamuosius ir ​rand()​ funkcija sugeneruokite jiems reikšmes nuo 0 iki 2. Suskaičiuokite kiek yra nulių, vienetų ir dvejetų. Rezultatus atspausdinkite su console.log()
+console.log(`
+**************** 4 užduotis ****************`)
+
+const randNo = Math.floor(Math.random() * 3);
+const randNo2 = Math.floor(Math.random() * 3);
+const randNo3 = Math.floor(Math.random() * 3);
+const randNo4 = Math.floor(Math.random() * 3);
+
+console.log(randNo);
+console.log(randNo2);
+console.log(randNo3);
+console.log(randNo4);
+
+function calcNo(array){
+  let zero = 0;
+  let one = 0;
+  let two = 0;
+  for (let i = 0; i < array.length; i++){
+    if (array[i] === 0){
+      zero++;
+    }
+    else if (array[i] === 1){
+      one++;
+    }
+    else if (array[i] === 2){
+      two++;
+    }
+  }
+  console.log("Nulių - " + zero + " Vienetų - " + one + " Dvejetų - " + two);
+}
+
+calcNo([randNo, randNo2, randNo3, randNo4]);
+
+// 5 užduotis
+// Naudokite funkcija rand(). Atspausdinkite 3 skaičius naudodami console.log() nuo -10 iki 10. Prie skaičių mažesnių už 0 iš abiejų pusių atspausdinkite “+” simbolius,  didesnių už 0 iš abiejų pusių atspausdinkite “-” simbolius, o prie 0 “*” simbolius
+console.log(`
+**************** 5 užduotis ****************`)
+
+function getRndInteger(min, max){
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function signs(x){
+  if (x > 0){
+    return "+" + x + "+";
+  }
+  else if (x === 0){
+    return "*" + x + "*";
+  }
+  else{
+    return x + "-";
+  }
+}
+
+console.log(signs(getRndInteger(-10, 10)));
+console.log(signs(getRndInteger(-10, 10)));
+console.log(signs(getRndInteger(-10, 10)));
+
+// 6 užduotis
+// Įmonė parduoda žvakes po 1 EUR. Perkant daugiau kaip už 1000 EUR taikoma 3 % nuolaida, daugiau kaip už 2000 EUR - 4 % nuolaida. Parašykite skriptą, kuri skaičiuos žvakių kainą ir atspausdintų atsakymą su console.log() kiek žvakių ir kokia kaina perkama. Žvakių kiekį generuokite ​rand()​ funkcija nuo 5 iki 3000.
+console.log(`
+**************** 6 užduotis ****************`)
+
+function candleCalc(candleNo){
+  if (candleNo > 1000){
+    console.log("Žvakių skaičius: " + candleNo + " kainuoja: " + (candleNo - (candleNo * 0.03)) + " Eur");
+  }
+  else if (candleNo > 2000) {
+    console.log("Žvakių skaičius: " + candleNo + " kainuoja: " + (candleNo - (candleNo * 0.04)) + " Eur");
+  }
+  else {
+    console.log("Žvakių skaičius: " + candleNo + " kainuoja: " + candleNo + " Eur");
+  }
+}
+
+candleCalc(getRndInteger(5, 3000));
+
+// 7 užduotis
+// Naudokite funkcija rand(). Sukurkite tris kintamuosius su atsitiktinem reikšmėm nuo 0 iki 100. Apskaičiuokite jų aritmetinį vidurkį. Ir aritmetinį vidurkį atmetus tas reikšmes, kurios yra mažesnės nei 10 arba didesnės nei 90. Abu vidurkius atspausdinkite su console.log()
+console.log(`
+**************** 7 užduotis ****************`)
+
+let randomN = Math.floor(Math.random() * 101);
+let randomN2 = Math.floor(Math.random() * 101);
+let randomN3 = Math.floor(Math.random() * 101);
+// console.log(randomN);
+// console.log(randomN2);
+// console.log(randomN3);
+
+let average = (randomN + randomN2 + randomN3)/3;
+console.log("Average 1: " + ((randomN + randomN2 + randomN3)/3));
+
+function calcAverage(array){
+  let sum = 0;
+  let counter = 0;
+  for (let i = 0; i < array.length; i++){
+    if (incorrectNo(array[i]) > 0){
+      sum = sum + array[i];
+      counter++;
+    }
+  }
+  console.log("Average 2: " + (sum / counter));
+}
+
+function incorrectNo(x){
+  if (x < 10 || x > 90){
+    return x = 0;
+  }
+  else {
+    return x;
+  }
+}
+
+calcAverage([randomN, randomN2, randomN3]);
