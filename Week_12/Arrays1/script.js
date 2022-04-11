@@ -129,7 +129,7 @@ console.log(`
 
 const twoHundreds = [];
 
-for (let i = 0; i < 201; i++){
+for (let i = 1; i < 201; i++){
   twoHundreds.push(i);
 }
 // console.log(twoHundreds);
@@ -139,7 +139,7 @@ for (let i = 0; i < 201; i++){
 console.log(`
 **************** 15 užduotis ****************`)
 
-for (let i = 0; i < twoHundreds.length; i++){
+for (let i = 1; i < twoHundreds.length; i++){
   twoHundreds[i] = twoHundreds[i] * 2;
 }
 // console.log(twoHundreds);
