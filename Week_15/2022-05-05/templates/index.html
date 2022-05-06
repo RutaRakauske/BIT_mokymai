@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            background-color:rgb(155, 227, 251);
+        }
+        .logoImg {
+            border-radius: 15px;
+            width: 100px;
+            height: 50px;
+        }
+        .uzduotys {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            margin: 35px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        h4 {
+            text-align: center;
+        }
+        .carouselImg {
+          height: 70vh;
+          width: 80vw;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./">
+            <img class = "logoImg" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="Company logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="./">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="./about">About Us</a>
+            <a class="nav-item nav-link" href="./clients">Clients</a>
+            <a class="nav-item nav-link" href="./career">Career</a>
+            <a class="nav-item nav-link" href="./contacts">Contacts</a>
+          </div>
+        </div>
+      </nav>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100 carouselImg" src="https://images.unsplash.com/photo-1604168612704-edf7120be425?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2066&q=80" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100 carouselImg" src="https://images.unsplash.com/photo-1562792897-d41224709724?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1969&q=80" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100 carouselImg" src="https://images.unsplash.com/photo-1557479152-f6ccd0dab74a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2105&q=80" alt="Third slide">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      <div class = "uzduotys">
+          <div>
+            <h4>1 užduotis</h4>
+            <p>Sukurkite du kelius ir du šablonus kurių turinys būtų grąžinamas naršyklėje atsidarius atitinkamus adresus.
+            Abiejuose šablonuose priskirkite jiems pasirinktą fono spalvą ir pridėkite html nuorodos elementą (a href="") su nuoroda į gretimą routeą.
+             T.y. Pirmame šablone sukurkite nuorodą į adresa /antras-kelias, o antrame šablone į adresa /pirmas-kelias.
+            Pabaigus užduotį uždėkite like arba įkelkite gif nuotrauką su atvaizduojamu veikimu.</p>
+          </div>
+          <div>
+            <h4>2 užduotis</h4>
+            <p>Sukurkite penkių puslapių reprezentacinę svetainę pasinaudojant bootstrap biblioteka.
+            Turiniui panaudokite Lipsum teksta. 
+            Sukurkite navigaciją su nuorodomis:</p>
+            <ul>
+                <li>Titulinis</li>
+                <li>Apie Kompaniją</li>
+                <li>Darbo galimybės</li>
+                <li>Klientai</li>
+                <li>Kontaktai</li>
+            </ul>
+            <p>Kiekvienai nuorodai sukurkite route'ą index.js faile ir po atskirą šabloną kiekvienam keliui.
+            Baigus darbą įkelkite screenshot'ą į chatą arba uždėkite like prie šios žinutės.</p>
+          </div>
+      </div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
