@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketvirta užduotis</title>
+    <style>
+        .divClass{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        const divEl = document.createElement('div')
+        divEl.innerHTML = 'Some kind of text'
+        divEl.classList.add('divClass')
+        document.body.appendChild(divEl)
+
+        function getRandomNo(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        let timer = setInterval(function(){
+            // console.log(getRandomNo(0, 500))
+            // console.log(divEl.style.top)
+            divEl.style.top = getRandomNo(0, 500) + 'px'
+            divEl.style.left = getRandomNo(0, 500) + 'px'
+        }, 1000);
+
+        divEl.addEventListener('click', (event) => {
+            clearInterval(timer)
+        })
+    </script>
+</body>
+</html>

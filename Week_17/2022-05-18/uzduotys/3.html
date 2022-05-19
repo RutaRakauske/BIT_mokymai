@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trečia užduotis</title>
+    <style>
+        body {
+            height: 5000px;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="header2">Tikslas pasiektas</h2>
+    <script>
+        window.addEventListener("scroll", (event) => {
+        let scroll = this.scrollY;
+        console.log(scroll)
+        if(scroll >= 3000){
+            document.querySelector('.header2').hidden = false;
+        }
+        else {
+            document.querySelector('.header2').hidden = true; 
+        }
+        });
+    </script>
+</body>
+</html>
