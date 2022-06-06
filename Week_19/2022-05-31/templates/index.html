@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktails</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        h1{
+            text-align: center;
+            font-family:Georgia, 'Times New Roman', Times, serif
+        }
+    </style>
+</head>
+<body>
+    <h1>Kokteiliai</h1>
+    <div class="alert"></div>
+
+    <div class="album py-5 bg-light" id="refreshContainer">
+        <div class="container">
+          <div class="row" id="addRow">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('http://localhost:3000/get-cocktail/')
+        .then(resp => resp.json())
+        .then(resp => {
+
+            let fullRows = ``
+            // console.log(resp.length)
+            for(let i = 0; i < resp.length; i++){
+                console.log(i)
+
+                let rowHtml = `
+                    <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="${resp[i].thumbnail}" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-text">${resp[i].title}</h4>
+                            <p class="card-text">Instructions: ${resp[i].instructions}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger" data-id="${resp[i]._id}" >Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                `
+                fullRows = fullRows + rowHtml
+            }
+            document.getElementById('addRow').innerHTML = fullRows
+
+            document.querySelectorAll('.btn-danger').forEach(element => {
+                const id = element.dataset.id
+
+                element.addEventListener('click', () => {
+                fetch('http://localhost:3000/delete/' + id)
+                .then(async resp => {
+                    const alert = document.querySelector('.alert')
+                    alert.textContent = await resp.text()
+                    if(resp.status === 200){
+                        alert.classList.add('alert-success')
+                        window.location.reload(true);
+                    } else {
+                        alert.classList.add('alert-danger')
+                    }
+                })
+            })
+        })
+    })
+
+    </script>
+</body>
+</html>
