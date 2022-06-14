@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prekiu sarasas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        img{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="notification"></div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Prekė</th>
+            <th scope="col">Prekės aprašymas</th>
+            <th scope="col">Prekės nuotraukos nuoroda</th>
+            <th scope="col">Prekės nuotrauka</th>
+            <th scope="col">Veiksmas</th>
+          </tr>
+        </thead>
+        <tbody id="addRow">
+
+        </tbody>
+      </table>
+      <form class="container" action="http://localhost:3000/api/items/new/" onsubmit="addItem(event)">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Prekės pavadinimas" name="itemName">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Prekės aprašymas" name="itemnDescription">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Prekės nuotrauka" name="itemPicture">
+        </div>
+        <button type="submit" class="btn btn-primary" >Pridėti prekę</button>
+      </form>
+
+    <script>
+        const fetchData = async (url, method = 'GET', body = {}) =>{
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            if(method != 'GET'){
+                options.body = JSON.stringify(body)
+            }
+            const tasks = await fetch(url, options)
+
+            if(tasks.status === 200){
+                if(method == 'GET'){
+                    return await tasks.json()
+                } else{
+                    return true
+                }
+            } else {
+                return false
+            }
+        }
+
+// Prideti nauja preke
+const addItem = async (event) => {
+    event.preventDefault()
+
+    const url = event.target.getAttribute('action')
+    const itemName = event.target.querySelector('input[name="itemName"]').value
+    const itemDesc = event.target.querySelector('input[name="itemnDescription"]').value
+    const itemPic = event.target.querySelector('input[name="itemPicture"]').value
+
+    if(await fetchData(url, 'POST', {
+        itemName: itemName,
+        itemDescription: itemDesc,
+        itemPicture: itemPic
+    })) {
+        itemsList('Prekė pridėta prie sąrašo')
+    } else {
+        itemsList('Prekės pridėti nepavyko', 'danger')
+    }
+}
+// Istrinti irasa
+const deleteItem = async (e) =>{
+    const element = e.target
+    const parent = element.parentNode.parentNode
+    const id = parent.dataset.id
+
+    element.dataset.delete = true
+
+    if(element.dataset.delete){
+        if(await fetchData('http://localhost:3000/api/items/delete/' + id, 'DELETE'))
+        {
+            itemsList('Prekė sėkmingai ištrinta')
+        } else {
+            itemsList('Prekės ištrinti nepavyko', 'danger')
+        }
+        return
+    }
+}
+// Redaguoti irasa db ir front ende
+const editText = 'Redaguoti'
+const updateText = 'Atnaujinti'
+
+const editItem = async (e) =>{
+    const element = e.target
+    const parent = element.parentNode.parentNode
+    const id = parent.dataset.id
+    // console.log(id)
+    const itemNameInp = parent.querySelector('.itemName')
+    const itemDescInp = parent.querySelector('.itemDescription')
+    const itemPicInp = parent.querySelector('.itemPicture')
+    
+    const itemNameText = itemNameInp.innerText
+    const itemDescText = itemDescInp.innerText
+    const itemPicText = itemPicInp.innerText
+    console.log(itemNameText)
+
+    if(element.dataset.update){
+        const itemName = itemNameInp.querySelector('.itemNameInput').value
+        const itemDescription = itemDescInp.querySelector('.itemDescriptionInput').value
+        const itemPicture = itemPicInp.querySelector('.itemPictureInput').value
+        // const itemDesc = e.target.querySelector('input[name="itemnDescription"]').value
+        // const itemPic = e.target.querySelector('input[name="itemPicture"]').value
+        if(await fetchData('http://localhost:3000/api/item/edit/' + id, 'PUT', {
+            itemName,
+            itemDescription,
+            itemPicture
+        })){
+            itemsList('Prekė sėkmingai atnaujinta')
+        } else {
+            itemsList('Prekės nepavyko atnaujinti', 'danger')
+        }
+        return
+    }
+    element.innerText = updateText
+    element.dataset.update = true
+    element.classList.add('btn-success')
+    itemNameInp.innerHTML = `<input type="text" class="form-control itemNameInput" value="${itemNameText}"> </input>`
+    itemDescInp.innerHTML = `<input type="text" class="form-control itemDescriptionInput" value="${itemDescText}"> </input>`
+    itemPicInp.innerHTML = `<input type="text" class="form-control itemPictureInput" value="${itemPicText}"> </input>`
+}
+
+// atvaizduoti duomenis is db
+const itemsList = async (message = '', status = 'success') => {
+        const items = await fetchData('http://localhost:3000/api/items')
+        let html = ''
+
+        items.map(resp => {
+            html += `<tr data-id="${resp._id}">
+                        <td class="itemName">${resp.itemName}</td>
+                        <td class="itemDescription">${resp.itemDescription}</td>
+                        <td class="itemPicture">${resp.itemPicture}</td>
+                        <td><img src="${resp.itemPicture}" alt="${resp.itemName}"></td>
+                        <td>
+                            <button class="btn btn-primary" onclick="deleteItem(event)">Trinti</button>
+                            <button class="btn btn-primary" onclick="editItem(event)">${editText}</button>
+                        </td>
+                    </tr>`
+        })
+        document.getElementById('addRow').innerHTML = html
+        let notification = ''
+        if(message){
+            notification += `<div class="alert alert-${status}">${message}</div>`
+            document.getElementById('notification').innerHTML = notification
+        }
+    }
+
+    itemsList()
+    </script>
+</body>
+</html>

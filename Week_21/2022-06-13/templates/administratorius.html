@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        table{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="notification"></div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Užsakyta prekė</th>
+            <th scope="col">Vardas</th>
+            <th scope="col">Pavardė</th>
+            <th scope="col">Adresas</th>
+            <th scope="col">Miestas</th>
+            <th scope="col">Telefono numeris</th>
+            <th scope="col">El. paštas</th>
+            <th scope="col">Statusas</th>
+            <th scope="col">Veiksmas</th>
+          </tr>
+        </thead>
+        <tbody id="addRow">
+
+        </tbody>
+      </table>
+<script>
+
+const fetchData = async (url, method = 'GET', body = {}) =>{
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            if(method != 'GET'){
+                options.body = JSON.stringify(body)
+            }
+            const tasks = await fetch(url, options)
+
+            if(tasks.status === 200){
+                if(method == 'GET'){
+                    return await tasks.json()
+                } else{
+                    return true
+                }
+            } else {
+                return false
+            }
+        }
+
+    // Duomenų atvaizdavimas is MongoDB
+
+    const ordersList = async (message = '', status = 'success') => {
+        const orders = await fetchData('http://localhost:3000/api/orders')
+        // console.log(tasks)
+        let html = ''
+
+        // if(message){
+        //     html += `<div class="alert alert-${status}">${message}</div>`
+        // }
+
+        orders.map(resp => {
+            html += `<tr data-id="${resp._id}">
+                        <td class="order-name">${resp.itemName}</td>
+                        <td>${resp.name}</td>
+                        <td>${resp.lastName}</td>
+                        <td>${resp.address}</td>
+                        <td>${resp.city}</td>
+                        <td>${resp.phoneNo}</td>
+                        <td>${resp.email}</td>
+                        <td>${resp.status}</td>
+                        `
+            if(resp.status == "Užbaigtas"){
+                html += `<td>
+                            <button class="btn btn-danger" onclick="deleteOrder(event)">Trinti</button>
+                            <button class="btn btn-danger" onclick="cancelledStatus(event)">Atšauktas</button>
+                        </td>
+                    </tr>` 
+            } else if(resp.status == "Pateiktas"){
+                html += `<td>
+                            <button class="btn btn-danger" onclick="deleteOrder(event)">Trinti</button>
+                            <button class="btn btn-danger" onclick="completedStatus(event)" value="completedOrder">Užbaigtas</button>
+                            <button class="btn btn-danger" onclick="cancelledStatus(event)" value="cancelledOrder">Atšauktas</button>
+                        </td>
+                    </tr>` 
+            } else{
+                html += `
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteOrder(event)">Trinti</button>
+                        </td>
+                    </tr>` 
+            }
+        })
+        document.getElementById('addRow').innerHTML = html
+        let notification = ''
+        if(message){
+            notification += `<div class="alert alert-${status}">${message}</div>`
+            document.getElementById('notification').innerHTML = notification
+        }
+    }
+
+const deleteOrder = async (e) =>{
+    const element = e.target
+    const parent = element.parentNode.parentNode
+    const id = parent.dataset.id
+    // console.log(id)
+    const order = parent.querySelector('.order-name')
+
+    const orderName = order.innerText
+    console.log(orderName)
+    element.dataset.delete = true
+
+    if(element.dataset.delete){
+        if(await fetchData('http://localhost:3000/api/orders/delete/' + id, 'DELETE'))
+        {
+            ordersList('Užduotis sėkmingai ištrinta')
+        } else {
+            ordersList('Užduoties ištrinti nepavyko', 'danger')
+        }
+        return
+    }
+}
+
+// Pakeisti statusa
+const completedStatus = async (e) =>{
+    const element = e.target
+    const parent = element.parentNode.parentNode
+    // console.log(parent)
+    const id = parent.dataset.id
+    element.dataset.update = true
+
+    if(element.dataset.update){
+        if(await fetchData('http://localhost:3000/api/order/edit/' + id, 'PUT', {
+            status: "Užbaigtas"
+        })){
+            ordersList('Užduotis sėkmingai atnaujinta')
+        } else {
+            ordersList('Nepavyko atnaujinti užduoties', 'danger')
+        }
+        return
+    }
+    // Remove button from options
+    const removeBtn = parent.querySelector('button[value="completedOrder"]')
+    removeBtn.parentElement.removeChild(removeBtn)
+}
+
+const cancelledStatus = async (e) =>{
+    const element = e.target
+    const parent = element.parentNode.parentNode
+    // console.log(parent)
+    const id = parent.dataset.id
+    element.dataset.update = true
+
+    if(element.dataset.update){
+        if(await fetchData('http://localhost:3000/api/order/edit/' + id, 'PUT', {
+            status: "Atšauktas"
+        })){
+            ordersList('Užduotis sėkmingai atnaujinta')
+        } else {
+            ordersList('Nepavyko atnaujinti užduoties', 'danger')
+        }
+        return
+    }
+    // Remove button from options
+    const removeBtn = parent.querySelector('button[value="cancelledOrder"]')
+    removeBtn.parentElement.removeChild(removeBtn)
+}
+
+
+ordersList()
+
+</script>  
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .container{
+            padding: 10px 0;
+        }
+        h4{
+            margin: 10px 20px;
+        }
+        img{
+            width: 200px;
+        }
+        .imageContainer{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 25px;
+            padding: 10px;
+        }
+        .form-check-label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <h4>Pasirinkite vieną iš prekių: </h4>
+    <div id="orderslist"></div>
+      
+    <script>
+        const fetchData = async (url, method = 'GET', body = {}) =>{
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            if(method != 'GET'){
+                options.body = JSON.stringify(body)
+            }
+            const orders = await fetch(url, options)
+
+            if(orders.status === 200){
+                if(method == 'GET'){
+                    return await orders.json()
+                } else{
+                    return true
+                }
+            } else {
+                return false
+            }
+        }
+
+        const addOrder = async (event) => {
+            event.preventDefault()
+
+            const url = event.target.getAttribute('action')
+            const name = event.target.querySelector('input[name="name"]').value
+            const lastName = event.target.querySelector('input[name="lastname"]').value
+            const address = event.target.querySelector('input[name="address"]').value
+            const city = event.target.querySelector('input[name="city"]').value
+            const phoneNo = event.target.querySelector('input[name="phone"]').value
+            const email = event.target.querySelector('input[name="email"]').value
+            const orderName = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+            const status = "Pateiktas"
+
+            if(await fetchData(url, 'POST', {
+                itemName: orderName,
+                name: name,
+                lastName: lastName,
+                address: address,
+                city: city,
+                phoneNo: phoneNo,
+                email: email,
+                status: status
+            })) {
+                orderList('Užsakymas pateiktas')
+            } else {
+                orderList('Nepavyko pateikti užsakymo', 'danger')
+            }
+        } 
+
+        const orderList = async (message = '', status = 'success') => {
+            const items = await fetchData('http://localhost:3000/api/items')
+            let html = ''
+
+            items.map(resp => {
+            html += `
+            <form class="container" action="http://localhost:3000/api/orders/new/" onsubmit="addOrder(event)">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="${resp.itemName}">
+            <label class="form-check-label" for="flexRadioDefault1">
+                ${resp.itemName}
+            </label>
+        </div>
+        <div class="imageContainer">
+            <img src="${resp.itemPicture}" alt="Lova Agnė">
+            <p>${resp.itemDescription}</p>
+        </div>
+            `
+    })
+
+    html += `
+        <h4>Užsakymo formą</h4>
+        <div class="row form-group">
+            <div class="col">
+            <input type="text" class="form-control" placeholder="Vardas" name="name">
+            </div>
+            <div class="col">
+            <input type="text" class="form-control" placeholder="Pavardė" name="lastname">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Adresas" name="address">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Miestas" name="city">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Telefono numeris" name="phone">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="El. paštas" name="email">
+        </div>
+        <button type="submit" class="btn btn-primary">Užsakyti</button>
+      </form>`
+            if(message){
+                html += `<div class="alert alert-${status}">${message}</div>`
+            }
+            document.querySelector('#orderslist').innerHTML = html
+        }
+
+        orderList()
+
+    </script>
+</body>
+</html>
